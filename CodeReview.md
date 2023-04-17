@@ -12,7 +12,7 @@
   - [设定原则](#设定原则)
   - [Checklist](#checklist)
   - [使用工具](#使用工具)
-- [TripPal + Emoji](#trippal--emoji)
+- [TripPal](#trippal)
 - [DangerJS + GitLab Pipeline](#dangerjs--gitlab-pipeline)
   - [关于 DangerJS](#关于-dangerjs)
   - [机器人账号](#机器人账号)
@@ -154,10 +154,16 @@ CR 需要 Author 和 Reviewer 的积极配合才能被顺利执行下去，我�
 ### 使用工具
 
 - ESLint + Prettier
-- TripPal + Emoji
+- TripPal
 - DangerJS + GitLab Pipeline
 
-## TripPal + Emoji
+## TripPal
+
+我们可以合理利用 TripPal 来让 CR 的过程变得顺畅：
+
+- **创建单独的 CR 组**。每个人每天都会收到大量的消息，单纯依靠 GitLab 的消息推送很可能错过，我们可以通过创建专门的组来统一处理 CR 消息。
+- **善于利用表情**。我们可以自定义表情，创建一些单独的有具体含义的表情来快速传达意思。
+- **关注 GitLab 服务号**。我们的 TripPal 中有专门的 GitLab 服务号，当在 GitLab 上存在相关通知时会同步推送到 TripPal 中，方便及时了解信息。
 
 ## DangerJS + GitLab Pipeline
 
@@ -176,6 +182,10 @@ CR 需要 Author 和 Reviewer 的积极配合才能被顺利执行下去，我�
 - 自动添加 Label
 - 混合发布风险提醒
 - ...
+
+我们可以根据自己的需求去灵活自定义功能，当然也可以查询并使用现成的一些插件。
+
+配置后的效果如下：
 
 | Danger Check Failed                                               |
 | :---------------------------------------------------------------- |
