@@ -3,24 +3,16 @@
 <!-- markdown-toc GFM -->
 
 - [关于 Code Review](#关于-code-review)
-- [CR 有什么优点？](#cr-有什么优点)
-- [CR 有什么痛点？](#cr-有什么痛点)
-- [对于 CR 的其他思考](#对于-cr-的其他思考)
-- [如何高效 CR？](#如何高效-cr)
-  - [心理安全](#心理安全)
-  - [明确职责](#明确职责)
-  - [设定原则](#设定原则)
-  - [Checklist](#checklist)
-  - [使用工具](#使用工具)
-- [TripPal](#trippal)
-- [DangerJS + GitLab Pipeline](#dangerjs--gitlab-pipeline)
-  - [关于 DangerJS](#关于-dangerjs)
-  - [机器人账号](#机器人账号)
-  - [DangerJS 初始化](#dangerjs-初始化)
-  - [项目设置](#项目设置)
-  - [配置 CI](#配置-ci)
-  - [本地调用 CI 运行](#本地调用-ci-运行)
+- [高效 CR 的建议](#高效-cr-的建议)
+- [工具一：TripPal](#工具一trippal)
+- [工具二：DangerJS](#工具二dangerjs)
+  - [什么是 DangerJS](#什么是dangerjs)
+  - [DangerJS 提供什么？](#dangerjs-提供什么)
+  - [DangerJS 能做什么？](#dangerjs-能做什么)
+  - [配置 DangerJS](#配置-dangerjs)
   - [最佳实践](#最佳实践)
+  - [功能概括](#功能概括)
+- [工具三：ChatGPT](#工具三chatgpt)
 
 <!-- markdown-toc -->
 
@@ -33,7 +25,9 @@ Code Review（以下简称 CR） 即代码审核，目前主要存在于两个�
 
 目前我们仅针对第二种情况进行讨论，因为可以这么理解，在这个阶段，我们 MR 中的内容即将从纯粹的代码转变为产品，在这个阶段的审核既是对开发人员的负责，也是对用户的负责。
 
-## CR 有什么优点？
+---
+
+**_1. 优点_**
 
 从 **Author** 的角度来看，通过 CR 可以：
 
@@ -50,7 +44,9 @@ Code Review（以下简称 CR） 即代码审核，目前主要存在于两个�
 - **形成开发规范**。
 - **培养开发文化**。
 
-## CR 有什么痛点？
+---
+
+**_2. 痛点_**
 
 - **缺少时间**。不管是 Author 还是 Reviewer 都会遇到关于时间的问题。
   - **Reviewer** 自己也有工作任务需要完成，如何去挤出时间来帮助他人完成代码审核，就有点考验 Reviewer 的工作及时间安排上的能力了。
@@ -61,7 +57,9 @@ Code Review（以下简称 CR） 即代码审核，目前主要存在于两个�
   - **大量干扰内容**。如果审核内容中包含了很多和 MR 功能开发无关的改动内容，那么就会大大降低审核效率。干扰内容的来源主要有两个，一个是项目缺少统一的格式化配置，导致每个人按照自己的开发习惯对内容进行了格式化；另一个是改动内容和本次 MR 的目的无关，
   - **无从下手**。感觉有很多方面需要去考虑，但是又因为需要考虑的方面太多导致不知道从哪项开始。
 
-## 对于 CR 的其他思考
+---
+
+**_3. 思考_**
 
 我们可以将 CR 作为开发流程的必选项，但是这并不代表 CR 就能很好地被执行，因为 CR 的执行，很大程度上依赖于 Reviewer 的认真审查，以及 Author 的积极配合，两者是缺一不可的。
 
@@ -74,19 +72,21 @@ CR 应该是一种开发文化，需要每个开发人员去切实认可，这�
 - **措施**。我们可以通过一些辅助手动，解决或者缓解 CR 过程中会遇到的痛点，让 CR 能够被顺利执行下去。
 - **循序渐进**。虽然我们期望这能够让 CR 成为一种开发文化，但毕竟需要一个过程。
 
-## 如何高效 CR？
+## 高效 CR 的建议
 
-### 心理安全
+**_1. 心理安全_**
 
 我们要相信不会根据代码审核的结果来衡量一个人的绩效，我们是通过 CR 来相互学习，减少可能存在的 bug，做更优质的产品。
 
 每个人都可以积极参与到 CR 中，不管是作为 Author 还是 Reviewer。
 
-### 明确职责
+---
 
-CR 需要 Author 和 Reviewer 的积极配合才能被顺利执行下去，我们也许要明确这个过程中双方需要承担的职责。
+**_2. 明确职责_**
 
-作为 **Author** 有义务让 CR 变的容易，所以可以从如下几个方面著手。
+CR 需要 Author 和 Reviewer 的积极配合才能被顺利执行下去，我们也需要明确这个过程中双方需要承担的职责。
+
+作为 **Author** 有义务让 CR 变的顺利，所以可以从如下几个方面著手。
 
 - **前置工作**，让额外干扰因素减少到最低：
   - Automated tests
@@ -104,7 +104,7 @@ CR 需要 Author 和 Reviewer 的积极配合才能被顺利执行下去，我�
 - **发起线下沟通**。当讨论的是一个有点复杂的问题时，及时考虑是否可以进行线下当面商议，同时将最终结果在线上标注。
 - **积极主动推动**。当遇到 Reviewer 迟迟没有给出响应时，积极主动去推动 CR
 
-作为 **Reviewer**，我们在 Reviewer 中也许要注意几点：
+作为 **Reviewer**，我们在代码审核过程中也许要注意几点：
 
 - **对代码不对人**，整个 CR 都应该是针对代码的友好交流，虽然事实上存在找错的行为，但 Author 和 Reviewer 不是对立的。
 - **遵循原则，而非个人观点**。Reviewer 需要明确，除了显而易见的错误之处，审核的标准应该是约定的原则，自己能够提供的是建议，更加不是阻塞这个 MR 进行的意见。
@@ -115,13 +115,17 @@ CR 需要 Author 和 Reviewer 的积极配合才能被顺利执行下去，我�
   2. 当已经提供了一些评论时，需要及时通知 Author ，方便其知晓并做出下一步操作
   3. 当认可当前 MR 时，需要及时 Approve 并标注 LGTM(look good to me)并提醒 Author
 
-### 设定原则
+---
+
+**_3. 设定原则_**
 
 - 技术事实和数据凌驾于观点和个人偏好之上
 - 如果没有明确规则适用，Reviewer 会要求和当前代码库中内容保持一致，只要这不会使项目整体代码建康状况变化
 - 如果没有明确的相关设计原则，那么在有说服力的证明（数据或可靠的工作原理）前提下，Reviewer 需要接受 Author 的偏好
 
-### Checklist
+---
+
+**_4. Checklist_**
 
 |  要点  |                                                                             审核内容                                                                             |
 | :----: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------: |
@@ -141,23 +145,26 @@ CR 需要 Author 和 Reviewer 的积极配合才能被顺利执行下去，我�
 - 任何 UI 更改都是合理的并且看起来不错。
 - 任何并行编程都是安全完成的。
 - 代码并不比它需要的更复杂。
-- 开发人员没有实现他们将来可能需要的东西，但不知道他们现在需要什么。
+- 开发人员没有实现他们将来可能需要的东西。
 - 代码有适当的单元测试。
 - 测试是精心设计的。
 - 开发人员对所有内容都使用了清晰的名称。
 - 评论清晰有用，主要解释为什么而不是什么。
-- 代码已适当记录（通常在 g3doc 中）。
-- 代码符合我们的风格指南。
+- 代码已适当记录。
+- 代码符合项目的风格指南。
 
-确保检查每一行代码，查看上下文，确保正在改进代码健康，并称赞开发人员所做的好活。
+确保每一行代码都被检查，确保正在改进代码健康度，称赞开发人员所做的好活。
 
-### 使用工具
+---
+
+**_5. 使用工具_**
 
 - ESLint + Prettier
 - TripPal
-- DangerJS + GitLab Pipeline
+- DangerJS
+- ChatGPT
 
-## TripPal
+## 工具一：TripPal
 
 我们可以合理利用 TripPal 来让 CR 在消息传递方面变得更加顺畅：
 
@@ -165,27 +172,107 @@ CR 需要 Author 和 Reviewer 的积极配合才能被顺利执行下去，我�
 - **善于利用表情**。我们可以自定义表情，创建一些单独的有具体含义的表情来快速传达意思。
 - **关注 GitLab 服务号**。我们的 TripPal 中有专门的 GitLab 服务号，当在 GitLab 上存在相关通知时会同步推送到 TripPal 中，方便及时了解信息。
 
-## DangerJS + GitLab Pipeline
+## 工具二：DangerJS
 
-### 关于 [DangerJS](https://danger.systems/js/)
+### 什么是[DangerJS](https://danger.systems/js/)
 
-| Code Flow                                      |
-| :--------------------------------------------- |
-| ![Code Flow](./images/CodeReview/codeFlow.png) |
+DangerJS 运行在 CI 过程中，它能帮助团队自动执行一定的代码审查工作，主要针对的是那些日常的、机械的、重复的工作，让人们能够有精力去思考更难的问题。同时，我们也可以自定义规范，让 DangerJS 帮助我们执行检查。
 
-能帮助我们什么？一些重复、机械的检测、提醒、操作都可以交给 DangerJS 实现。
+| Danger Flow                                        |
+| :------------------------------------------------- |
+| ![Danger Flow](./images/CodeReview/dangerFlow.png) |
 
-- 强制要求 Changelogs
-- 鼓励小 MR
-- 鼓励更多测试用例
-- 提醒自我审核
-- 自动添加 Label
-- 混合发布风险提醒
-- ...
+### DangerJS 提供什么？
 
-我们可以根据自己的需求去灵活自定义功能，当然也可以查询并使用现成的一些插件。
+DangerJS 向使用这提供两类工具，第一类是 log 工具，我们可以通过这些工具向 Merge Request 提交评论。
 
-配置后的效果如下：
+```javascript
+import { fail, warn, message } from "danger";
+
+fail("Eslint has failed with 2 failed files.");
+warn("You have not included a CHANGELOG entry.");
+message("You have added 2 more modules to the app.");
+```
+
+| What is DangerJS                                     |
+| :--------------------------------------------------- |
+| ![Code Flow](./images/CodeReview/whatIsDangerJS.png) |
+
+这些方法唯一的区别在于输出内容前方的图标，唯一特殊的是我们在调用运行是添加参数 `--failOnErrors (-f)` 那么 Pipeline 会因为我们调用`fail`方法而导致失败。
+
+第二类工具是一系列封装的信息，以平台为纬度进行区分，各平台提供信息的结构略有不同。
+
+<details>
+  <summary style="cursor: pointer; text-decoration:underline; color: #2AD;">相关信息</summary>
+
+```javascript
+import { danger } from "danger";
+
+const {
+  git: {
+    created_files,
+    modified_files,
+    deleted_files,
+    base,
+    head,
+    structuredDiffForFile,
+    // ...
+  },
+  gitlab: {
+    metadata: { pullRequestID },
+    mr: {
+      id,
+      project_id,
+      title,
+      description,
+      state,
+      source_branch,
+      target_branch,
+      assignee,
+      source_project_id,
+      target_project_id,
+      labels,
+      // ...
+    },
+    commits,
+    utils: {
+      fileContents,
+      addLabels,
+      removeLabels,
+      // ...
+    },
+  },
+  github: {
+    // ...
+  },
+  bitbucket_server: {
+    // ..
+  },
+  bitbucket_cloud: {
+    // ...
+  },
+} = getDanger();
+```
+
+</details>
+
+### DangerJS 能做什么？
+
+DangerJS 本身不会帮助我们实现检查，但是我们可以利用这些信息去分析校验，以检查 CHANGELOG 为例：
+
+```javascript
+// Add a CHANGELOG entry for app changes
+const hasChangelog = danger.git.modified_files.includes("changelog.md");
+const isTrivial = (danger.github.pr.body + danger.github.pr.title).includes(
+  "#trivial"
+);
+
+if (!hasChangelog && !isTrivial) {
+  warn("Please add a changelog entry for your changes.");
+}
+```
+
+我们可以根据自己的需求去灵活自定义功能，当然也可以查询并使用现成的一些插件。配置使用后的效果如下：
 
 | Danger Check Failed                                               |
 | :---------------------------------------------------------------- |
@@ -195,18 +282,46 @@ CR 需要 Author 和 Reviewer 的积极配合才能被顺利执行下去，我�
 | :--------------------------------------------------------- |
 | ![Failed Messages](./images/CodeReview/failedMessages.png) |
 
-### 机器人账号
+<details>
+  <summary style="cursor: pointer; text-decoration:underline; color: #2AD;">支持平台</summary>
 
-建议使用专门的账号作为机器人账号，用于发表 DangerJS 校验评论提醒。
+- AppCenter
+- Bamboo
+- BitbucketPipelines
+- Bitrise
+- BuddyBuild
+- BuddyWorks
+- Buildkite
+- Circle
+- Cirrus
+- CodeBuild
+- Codefresh
+- Codemagic
+- Codeship
+- Concourse
+- DockerCloud
+- Drone
+- GitHubActions
+- GitLabCI
+- Jenkins
+- Netlify
+- Nevercode
+- Screwdriver
+- Semaphore
+- Surf
+- TeamCity
+- Travis
+- VSTS
 
-在个人设置创建一个名为`DANGER_GITLAB_API_TOKEN`的`Access Token`，在创建过程中需要设置过期时间及权限范围。
+</details>
 
-1. 过期时间：对于专门的机器人账号可以选择较长的时间。
-2. 权限范围：由于需要读&写两种权限，所以选择`api`。
+### 配置 DangerJS
 
-在创建`DANGER_GITLAB_API_TOKEN`完成后会显示对应的 token 值，务必将这个 token 值记录下来备用，因为只会显示一次！！！
+> 以下配置均基于 GitLab
 
-### DangerJS 初始化
+---
+
+**_1. 在项目中引入 DangerJS_**
 
 在项目中安装依赖
 
@@ -214,7 +329,7 @@ CR 需要 Author 和 Reviewer 的积极配合才能被顺利执行下去，我�
 npm install -D danger
 ```
 
-在项目根目录中创建`dangerfile.{js|ts}`文件，在其中写入想要让 DangerJS 帮助我们完成的工作。这里简单判断 MR 状态:
+在项目根目录中创建`dangerfile.{js|ts}`文件，在其中写入想要让 DangerJS 帮助我们完成的检查任务。这里简单判断 MR 状态:
 
 ```javascript
 import { danger, warn } from "danger";
@@ -224,25 +339,47 @@ if (danger.gitlab.mr.title.includes("Draft")) {
 }
 ```
 
-同时，可通过 npm 命令向`package.json`中添加对应的命令
+最后，可通过 npm 命令向`package.json`中添加对应的命令
 
 ```bash
-npm set-script 'ci:danger' 'npx danger ci --failOnErrors -v'
+npm set-script 'ci:danger' 'npx danger ci -f -v'
 ```
 
-### 项目设置
+我们可以通过 `npx danger help ci` 来查询对应命令的使用方法，在这里使用到了两个参数
 
-项目中需要做三个操作
+- `-f` 为 `--failOnErrors`，使 DangerJS 在遇到`fail`输出信息是抛出错误，从而让 Pipeline 终止执行
+- `-v` 为 `--verbose`，用于使 DangerJS 执行时同步输出日志信息，方便查阅
 
-1. 添加机器人账号到项目成员中。
-2. 设置 Gitlab 环境变量，具体路径为`Settings` > `CI/CD` > `Variables`中，添加的变量如下：
+---
+
+**_2. 评论账号_**
+
+理论上任何账号都可以被用于提交 DangerJS 评论，但还是推荐使用一个专门的机器人账号来做这项工作。
+
+登录评论账号，然后在个人设置创建一个名为`DANGER_GITLAB_API_TOKEN`的`Access Token`，在创建过程中需要设置过期时间及权限范围。
+
+1. 过期时间：对于专门的机器人账号可以选择较长的时间。
+2. 权限范围：由于需要读&写两种权限，所以选择`api`。
+
+在创建`DANGER_GITLAB_API_TOKEN`完成后会显示对应的 token 值，务必将这个 token 值记录下来备用，因为只会显示一次！！！
+
+---
+
+**_3. 项目设置_**
+
+在项目中安装好 DangerJS 及准备好评论账号后，我们还需要将 DangerJS 配置进 Pipeline 中：
+
+1. 添加机器人评论账号到项目成员中，具体路径为 `Members` > `Invite member`，可以选择 `Developer` 角色
+2. 设置 Gitlab 环境变量，具体路径为 `Settings` > `CI/CD` > `Variables`中，添加的变量如下：
 
 - 变量名为`DANGER_GITLAB_API_TOKEN`，值为刚才创建的机器人账号的 Access Token - `DANGER_GITLAB_API_TOKEN`
 - 变量名为`DANGER_GITLAB_HOST`，值为`http://git.dev.sh.ctripcorp.com`，对应公司 Gitlab 的 host
 
 3. 配置 CI。
 
-### 配置 CI
+---
+
+**_4. CI 设置_**
 
 推荐在`VerifyAndBuild`前添加一个`Check`的阶段，以我们项目为例的 Danger 任务配置如下：
 
@@ -266,7 +403,9 @@ Danger:
 
 至此项目的配置基本完成，可以通过创建一个 MR 来测试效果。
 
-### 本地调用 CI 运行
+---
+
+**_5. 本地调用_**
 
 如果想要在本地调试`dangerfile.{js|ts}`文件，可以通过 danger 提供的本地调试功能完成。具体操作如下：
 
@@ -464,3 +603,15 @@ if (
   }
 }
 ```
+
+</details>
+
+### 功能概括
+
+- 分析 MR 相关信息并做一些针对性的操作
+- 分析本地代码及数据，如 test coverage、lighthouse report、bundle size
+
+## 工具三：ChatGPT
+
+1. 添加 ChatGPT 到项目成员中
+2. 在某个 Diff 区块下`@ChatGPT`帮助审核变更代码
