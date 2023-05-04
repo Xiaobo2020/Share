@@ -5,14 +5,14 @@
 - [关于 Code Review](#关于-code-review)
 - [高效 CR 的建议](#高效-cr-的建议)
 - [工具一：TripPal](#工具一trippal)
-- [工具二：DangerJS](#工具二dangerjs)
+- [工具二：ChatGPT](#工具二chatgpt)
+- [工具三：DangerJS](#工具三dangerjs)
   - [什么是 DangerJS](#什么是dangerjs)
   - [DangerJS 提供什么？](#dangerjs-提供什么)
   - [DangerJS 能做什么？](#dangerjs-能做什么)
   - [配置 DangerJS](#配置-dangerjs)
   - [最佳实践](#最佳实践)
   - [功能概括](#功能概括)
-- [工具三：ChatGPT](#工具三chatgpt)
 
 <!-- markdown-toc -->
 
@@ -172,7 +172,12 @@ CR 需要 Author 和 Reviewer 的积极配合才能被顺利执行下去，我�
 - **善于利用表情**。我们可以自定义表情，创建一些单独的有具体含义的表情来快速传达意思。
 - **关注 GitLab 服务号**。我们的 TripPal 中有专门的 GitLab 服务号，当在 GitLab 上存在相关通知时会同步推送到 TripPal 中，方便及时了解信息。
 
-## 工具二：DangerJS
+## 工具二：ChatGPT
+
+1. 添加 ChatGPT 到项目成员中
+2. 在某个 Diff 区块下`@ChatGPT`帮助审核变更代码
+
+## 工具三：DangerJS
 
 ### 什么是[DangerJS](https://danger.systems/js/)
 
@@ -610,8 +615,3 @@ if (
 
 - 分析 MR 相关信息并做一些针对性的操作
 - 分析本地代码及数据，如 test coverage、lighthouse report、bundle size
-
-## 工具三：ChatGPT
-
-1. 添加 ChatGPT 到项目成员中
-2. 在某个 Diff 区块下`@ChatGPT`帮助审核变更代码
